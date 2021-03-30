@@ -12,7 +12,7 @@ class Update extends AbstractEntity
     private ?InlineQuery        $inline_query         = null;
     private ?ChosenInlineResult $chosen_inline_result = null;
     private ?CallbackQuery      $callback_query       = null;
-    private                     $shipping_query;
+    private ?ShippingQuery      $shipping_query       = null;
     private                     $pre_checkout_query;
     private                     $poll;
     private                     $poll_answer;
@@ -25,6 +25,8 @@ class Update extends AbstractEntity
         'channel_post'         => Message::class,
         'edited_channel_post'  => Message::class,
         'inline_query'         => InlineQuery::class,
-        'chosen_inline_result' => ChosenInlineResult::class
+        'chosen_inline_result' => ChosenInlineResult::class,
+        'callback_query'       => CallbackQuery::class,
+        'shipping_query'       => ShippingQuery::class,
     ];
 }
