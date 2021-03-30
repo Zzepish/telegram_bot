@@ -5,11 +5,8 @@ namespace App\Components\Entity;
 use App\Components\Entity\Traits\ObjectFillTrait;
 use App\Components\Entity\Traits\PropertiesFromArrayTrait;
 
-class Chat
+class Chat extends AbstractEntity
 {
-    use PropertiesFromArrayTrait;
-    use ObjectFillTrait;
-
     private int        $id;
     private string     $type;
     private ?string    $title                    = null;
@@ -33,12 +30,6 @@ class Chat
         'photo'          => ChatPhoto::class,
         'pinned_message' => Message::class
     ];
-
-    public function __construct(array $data)
-    {
-        $data = $this->fillObjects($data);
-        $this->setProperties($data);
-    }
 
     public function getId(): int
     {
@@ -90,7 +81,7 @@ class Chat
         return $this->invite_link;
     }
 
-    public function getPinnedMessage()
+    public function getPinnedMessage(): ?Message
     {
         return $this->pinned_message;
     }

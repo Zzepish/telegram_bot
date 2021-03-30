@@ -2,19 +2,30 @@
 
 namespace App\Components\Entity;
 
-use App\Components\Entity\Traits\PropertiesFromArrayTrait;
-
-class ChatPhoto
+class ChatPhoto extends AbstractEntity
 {
-    use PropertiesFromArrayTrait;
-
     private string $small_file_id;
     private string $small_file_unique_id;
     private string $big_file_id;
     private string $big_file_unique_id;
 
-    public function __construct(array $data)
+    public function getSmallFileId(): string
     {
-        $this->setProperties($data);
+        return $this->small_file_id;
+    }
+
+    public function getSmallFileUniqueId(): string
+    {
+        return $this->small_file_unique_id;
+    }
+
+    public function getBigFileId(): string
+    {
+        return $this->big_file_id;
+    }
+
+    public function getBigFileUniqueId(): string
+    {
+        return $this->big_file_unique_id;
     }
 }

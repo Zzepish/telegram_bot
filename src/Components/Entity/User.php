@@ -2,12 +2,8 @@
 
 namespace App\Components\Entity;
 
-use App\Components\Entity\Traits\PropertiesFromArrayTrait;
-
-class User
+class User extends AbstractEntity
 {
-    use PropertiesFromArrayTrait;
-
     private int     $id;
     private bool    $is_bot;
     private ?string $first_name                  = null;
@@ -17,11 +13,6 @@ class User
     private ?bool   $can_join_groups             = null;
     private ?bool   $can_read_all_group_messages = null;
     private ?bool   $supports_inline_queries     = null;
-
-    public function __construct(array $data)
-    {
-        $this->setProperties($data);
-    }
 
     public function getId(): int
     {
