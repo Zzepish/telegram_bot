@@ -13,11 +13,11 @@ class Update extends AbstractEntity
     private ?ChosenInlineResult $chosen_inline_result = null;
     private ?CallbackQuery      $callback_query       = null;
     private ?ShippingQuery      $shipping_query       = null;
-    private                     $pre_checkout_query;
-    private                     $poll;
-    private                     $poll_answer;
-    private                     $my_chat_member;
-    private                     $chat_member;
+    private ?PreCheckoutQuery   $pre_checkout_query   = null;
+    private ?Poll               $poll                 = null;
+    private ?PollAnswer         $poll_answer          = null;
+    private ?ChatMemberUpdated  $my_chat_member       = null;
+    private ?ChatMemberUpdated  $chat_member          = null;
 
     protected array $objects_to_fill = [
         'message'              => Message::class,
@@ -28,5 +28,79 @@ class Update extends AbstractEntity
         'chosen_inline_result' => ChosenInlineResult::class,
         'callback_query'       => CallbackQuery::class,
         'shipping_query'       => ShippingQuery::class,
+        'poll'                 => Poll::class,
+        'poll_answer'          => PollAnswer::class,
+        'my_chat_member'       => ChatMemberUpdated::class,
+        'chat_member'          => ChatMemberUpdated::class,
     ];
+
+    public function getUpdateId(): int
+    {
+        return $this->update_id;
+    }
+
+    public function getMessage(): ?Message
+    {
+        return $this->message;
+    }
+
+    public function getEditedMessage(): ?Message
+    {
+        return $this->edited_message;
+    }
+
+    public function getChannelPost(): ?Message
+    {
+        return $this->channel_post;
+    }
+
+    public function getEditedChannelPost(): ?Message
+    {
+        return $this->edited_channel_post;
+    }
+
+    public function getInlineQuery(): ?InlineQuery
+    {
+        return $this->inline_query;
+    }
+
+    public function getChosenInlineResult(): ?ChosenInlineResult
+    {
+        return $this->chosen_inline_result;
+    }
+
+    public function getCallbackQuery(): ?CallbackQuery
+    {
+        return $this->callback_query;
+    }
+
+    public function getShippingQuery(): ?ShippingQuery
+    {
+        return $this->shipping_query;
+    }
+
+    public function getPreCheckoutQuery(): ?PreCheckoutQuery
+    {
+        return $this->pre_checkout_query;
+    }
+
+    public function getPoll(): ?Poll
+    {
+        return $this->poll;
+    }
+
+    public function getPollAnswer(): ?PollAnswer
+    {
+        return $this->poll_answer;
+    }
+
+    public function getMyChatMember(): ?ChatMemberUpdated
+    {
+        return $this->my_chat_member;
+    }
+
+    public function getChatMember(): ?ChatMemberUpdated
+    {
+        return $this->chat_member;
+    }
 }

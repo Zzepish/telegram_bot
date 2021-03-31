@@ -2,9 +2,6 @@
 
 namespace App\Components\Entity;
 
-use App\Components\Entity\Traits\ObjectFillTrait;
-use App\Components\Entity\Traits\PropertiesFromArrayTrait;
-
 class Chat extends AbstractEntity
 {
     private int        $id;
