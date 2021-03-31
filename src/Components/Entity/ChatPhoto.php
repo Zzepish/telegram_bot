@@ -2,12 +2,12 @@
 
 namespace App\Components\Entity;
 
-class ChatPhoto extends AbstractEntity
+class ChatPhoto extends AbstractImmutableEntity
 {
-    private string $small_file_id;
-    private string $small_file_unique_id;
-    private string $big_file_id;
-    private string $big_file_unique_id;
+    protected string $small_file_id;
+    protected string $small_file_unique_id;
+    protected string $big_file_id;
+    protected string $big_file_unique_id;
 
     public function getSmallFileId(): string
     {

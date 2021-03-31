@@ -2,17 +2,17 @@
 
 namespace App\Components\Entity;
 
-class User extends AbstractEntity
+class User extends AbstractImmutableEntity
 {
-    private int     $id;
-    private bool    $is_bot;
-    private ?string $first_name                  = null;
-    private ?string $last_name                   = null;
-    private ?string $username                    = null;
-    private ?string $language_code               = null;
-    private ?bool   $can_join_groups             = null;
-    private ?bool   $can_read_all_group_messages = null;
-    private ?bool   $supports_inline_queries     = null;
+    protected int     $id = 0;
+    protected bool    $is_bot = false;
+    protected ?string $first_name                  = null;
+    protected ?string $last_name                   = null;
+    protected ?string $username                    = null;
+    protected ?string $language_code               = null;
+    protected ?bool   $can_join_groups             = null;
+    protected ?bool   $can_read_all_group_messages = null;
+    protected ?bool   $supports_inline_queries     = null;
 
     public function getId(): int
     {

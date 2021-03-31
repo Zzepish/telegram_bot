@@ -2,14 +2,14 @@
 
 namespace App\Components\Entity;
 
-class ShippingAddress extends AbstractEntity
+class ShippingAddress extends AbstractImmutableEntity
 {
-    private string $country_code;
-    private string $state;
-    private string $city;
-    private string $street_line1;
-    private string $street_line2;
-    private string $post_code;
+    protected string $country_code;
+    protected string $state;
+    protected string $city;
+    protected string $street_line1;
+    protected string $street_line2;
+    protected string $post_code;
 
     public function getCountryCode(): string
     {

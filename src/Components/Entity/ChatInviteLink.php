@@ -2,14 +2,14 @@
 
 namespace App\Components\Entity;
 
-class ChatInviteLink extends AbstractEntity
+class ChatInviteLink extends AbstractImmutableEntity
 {
-    private string $invite_link;
-    private User   $creator;
-    private bool   $is_primary;
-    private bool   $is_revoked;
-    private ?int   $expire_date  = null;
-    private ?int   $member_limit = null;
+    protected string $invite_link;
+    protected User   $creator;
+    protected bool   $is_primary;
+    protected bool   $is_revoked;
+    protected ?int   $expire_date  = null;
+    protected ?int   $member_limit = null;
 
     protected array $objects_to_fill = [
         'creator' => User::class,

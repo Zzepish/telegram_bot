@@ -2,31 +2,31 @@
 
 namespace App\Components\Entity;
 
-class Poll extends AbstractEntity
+class Poll extends AbstractImmutableEntity
 {
     public const TYPE_REGULAR = 'regular';
     public const TYPE_QUIZ    = 'quiz';
 
 
-    private string $id;
-    private string $question;
+    protected string $id;
+    protected string $question;
     /**
      * @var PollOption[]
      */
-    private array   $options;
-    private int     $total_voter_count;
-    private bool    $is_closed;
-    private bool    $is_anonymous;
-    private string  $type;
-    private bool    $allows_multiple_answers;
-    private ?int    $correct_option_id = null;
-    private ?string $explanation       = null;
+    protected array   $options;
+    protected int     $total_voter_count;
+    protected bool    $is_closed;
+    protected bool    $is_anonymous;
+    protected string  $type;
+    protected bool    $allows_multiple_answers;
+    protected ?int    $correct_option_id = null;
+    protected ?string $explanation       = null;
     /**
      * @var MessageEntity[]
      */
-    private ?array $explanation_entities = null;
-    private ?int   $open_period          = null;
-    private ?int   $close_date           = null;
+    protected ?array $explanation_entities = null;
+    protected ?int   $open_period          = null;
+    protected ?int   $close_date           = null;
 
     protected array $objects_to_fill = [
         'options'              => PollOption::class,

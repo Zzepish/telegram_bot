@@ -2,15 +2,15 @@
 
 namespace App\Components\Entity;
 
-class CallbackQuery extends AbstractEntity
+class CallbackQuery extends AbstractImmutableEntity
 {
-    private string   $id;
-    private User     $from;
-    private ?Message $message           = null;
-    private ?string  $inline_message_id = null;
-    private string   $chat_instance;
-    private ?string  $data              = null;
-    private ?string  $game_short_name   = null;
+    protected string   $id;
+    protected User     $from;
+    protected ?Message $message           = null;
+    protected ?string  $inline_message_id = null;
+    protected string   $chat_instance;
+    protected ?string  $data              = null;
+    protected ?string  $game_short_name   = null;
 
     protected array $objects_to_fill = [
         'from'    => User::class,

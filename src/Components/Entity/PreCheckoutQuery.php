@@ -2,15 +2,15 @@
 
 namespace App\Components\Entity;
 
-class PreCheckoutQuery extends AbstractEntity
+class PreCheckoutQuery extends AbstractImmutableEntity
 {
-    private string     $id;
-    private User       $from;
-    private string     $currency;
-    private int        $total_amount;
-    private string     $invoice_payload;
-    private ?string    $shipping_option_id = null;
-    private ?OrderInfo $order_info         = null;
+    protected string     $id;
+    protected User       $from;
+    protected string     $currency;
+    protected int        $total_amount;
+    protected string     $invoice_payload;
+    protected ?string    $shipping_option_id = null;
+    protected ?OrderInfo $order_info         = null;
 
     protected array $objects_to_fill = [
         'from'       => User::class,

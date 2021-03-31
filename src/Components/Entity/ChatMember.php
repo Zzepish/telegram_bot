@@ -2,7 +2,7 @@
 
 namespace App\Components\Entity;
 
-class ChatMember extends AbstractEntity
+class ChatMember extends AbstractImmutableEntity
 {
     public const STATUS_CREATOR       = 'creator';
     public const STATUS_ADMINISTRATOR = 'administrator';
@@ -11,28 +11,28 @@ class ChatMember extends AbstractEntity
     public const STATUS_LEFT          = 'left';
     public const STATUS_KICKED        = 'kicked';
 
-    private User    $user;
-    private string  $status;
-    private ?string $custom_title              = null;
-    private ?bool   $is_anonymous              = null;
-    private ?bool   $can_be_edited             = null;
-    private ?bool   $can_manage_chat           = null;
-    private ?bool   $can_post_messages         = null;
-    private ?bool   $can_edit_messages         = null;
-    private ?bool   $can_delete_messages       = null;
-    private ?bool   $can_manage_voice_chats    = null;
-    private ?bool   $can_restrict_members      = null;
-    private ?bool   $can_promote_members       = null;
-    private ?bool   $can_change_info           = null;
-    private ?bool   $can_invite_users          = null;
-    private ?bool   $can_pin_messages          = null;
-    private ?bool   $is_member                 = null;
-    private ?bool   $can_send_messages         = null;
-    private ?bool   $can_send_media_messages   = null;
-    private ?bool   $can_send_polls            = null;
-    private ?bool   $can_send_other_messages   = null;
-    private ?bool   $can_add_web_page_previews = null;
-    private ?int    $until_date                = null;
+    protected User    $user;
+    protected string  $status;
+    protected ?string $custom_title              = null;
+    protected ?bool   $is_anonymous              = null;
+    protected ?bool   $can_be_edited             = null;
+    protected ?bool   $can_manage_chat           = null;
+    protected ?bool   $can_post_messages         = null;
+    protected ?bool   $can_edit_messages         = null;
+    protected ?bool   $can_delete_messages       = null;
+    protected ?bool   $can_manage_voice_chats    = null;
+    protected ?bool   $can_restrict_members      = null;
+    protected ?bool   $can_promote_members       = null;
+    protected ?bool   $can_change_info           = null;
+    protected ?bool   $can_invite_users          = null;
+    protected ?bool   $can_pin_messages          = null;
+    protected ?bool   $is_member                 = null;
+    protected ?bool   $can_send_messages         = null;
+    protected ?bool   $can_send_media_messages   = null;
+    protected ?bool   $can_send_polls            = null;
+    protected ?bool   $can_send_other_messages   = null;
+    protected ?bool   $can_add_web_page_previews = null;
+    protected ?int    $until_date                = null;
 
     protected array $objects_to_fill = [
         'user' => User::class,

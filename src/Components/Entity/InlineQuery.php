@@ -2,13 +2,13 @@
 
 namespace App\Components\Entity;
 
-class InlineQuery extends AbstractEntity
+class InlineQuery extends AbstractImmutableEntity
 {
-    private string    $id;
-    private User      $from;
-    private ?Location $location = null;
-    private string    $query;
-    private string    $offset;
+    protected string    $id;
+    protected User      $from;
+    protected ?Location $location = null;
+    protected string    $query;
+    protected string    $offset;
 
     protected array $objects_to_fill = [
         'from'     => User::class,

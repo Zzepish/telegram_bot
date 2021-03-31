@@ -2,17 +2,17 @@
 
 namespace App\Components\Entity;
 
-class OrderInfo extends AbstractEntity
+class OrderInfo extends AbstractImmutableEntity
 {
-    private ?string          $name             = null;
-    private ?string          $phone_number     = null;
-    private ?string          $email            = null;
-    private ?ShippingAddress $shipping_address = null;
+    protected ?string          $name             = null;
+    protected ?string          $phone_number     = null;
+    protected ?string          $email            = null;
+    protected ?ShippingAddress $shipping_address = null;
 
     protected array $objects_to_fill = [
         'shipping_address' => ShippingAddress::class
     ];
-    
+
     public function getName(): ?string
     {
         return $this->name;

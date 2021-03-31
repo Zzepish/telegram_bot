@@ -2,10 +2,10 @@
 
 namespace App\Components\Entity;
 
-class PollOption extends AbstractEntity
+class PollOption extends AbstractImmutableEntity
 {
-    private string $text;
-    private int    $voter_count;
+    protected string $text;
+    protected int    $voter_count;
 
     public function getText(): string
     {

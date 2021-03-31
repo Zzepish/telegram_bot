@@ -2,13 +2,13 @@
 
 namespace App\Components\Entity;
 
-class ChosenInlineResult extends AbstractEntity
+class ChosenInlineResult extends AbstractImmutableEntity
 {
-    private string    $result_id;
-    private User      $from;
-    private ?Location $location          = null;
-    private ?string   $inline_message_id = null;
-    private string    $query;
+    protected string    $result_id;
+    protected User      $from;
+    protected ?Location $location          = null;
+    protected ?string   $inline_message_id = null;
+    protected string    $query;
 
     protected array $objects_to_fill = [
         'from'     => User::class,

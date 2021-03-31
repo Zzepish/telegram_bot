@@ -2,7 +2,7 @@
 
 namespace App\Components\Entity;
 
-class MessageEntity extends AbstractEntity
+class MessageEntity extends AbstractImmutableEntity
 {
     public const TYPE_MENTION       = 'mention';
     public const TYPE_HASHTAG       = 'hashtag';
@@ -20,12 +20,12 @@ class MessageEntity extends AbstractEntity
     public const TYPE_TEXT_LINK     = 'text_link';
     public const TYPE_TEXT_MENTION  = 'text_mention';
 
-    private string  $type;
-    private int     $offset;
-    private int     $length;
-    private ?string $url      = null;
-    private ?User   $user     = null;
-    private ?string $language = null;
+    protected string  $type;
+    protected int     $offset;
+    protected int     $length;
+    protected ?string $url      = null;
+    protected ?User   $user     = null;
+    protected ?string $language = null;
 
     protected array $objects_to_fill = [
         'user' => User::class

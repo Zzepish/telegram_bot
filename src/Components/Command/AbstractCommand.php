@@ -2,7 +2,7 @@
 
 namespace App\Components\Command;
 
-use App\Components\Response;
+use App\Components\Entity\Update;
 use App\Telegram;
 
 abstract class AbstractCommand implements CommandInterface
@@ -18,8 +18,25 @@ abstract class AbstractCommand implements CommandInterface
         $this->telegram = $telegram;
     }
 
-    public function isValid(?Response $response): bool
+    public function isValid(Update $update): bool
     {
+        $command = preg_split('#\s+|@#',$update->getMessage()->getText());
 
+        return (trim(strtolower($command[0])) === '/' . strtolower($this->command));
+    }
+
+    public function getCommand(): string
+    {
+        return $this->command;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 }

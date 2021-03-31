@@ -2,10 +2,11 @@
 
 namespace App\Components\Command;
 
-use App\Components\Response;
+use App\Components\Entity\Update;
 
 interface CommandInterface
 {
-    public function isValid(?Response $response): bool;
-    public function execute(?Response $response);
+    public function isValid(Update $update): bool;
+    public function execute(?Update $update = null);
+    public function getCommand(): string;
 }

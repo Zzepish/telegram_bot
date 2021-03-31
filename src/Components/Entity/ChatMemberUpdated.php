@@ -2,14 +2,14 @@
 
 namespace App\Components\Entity;
 
-class ChatMemberUpdated extends AbstractEntity
+class ChatMemberUpdated extends AbstractImmutableEntity
 {
-    private Chat $chat;
-    private User $from;
-    private int $date;
-    private ChatMember $old_chat_member;
-    private ChatMember $new_chat_member;
-    private ?ChatInviteLink $invite_link = null;
+    protected Chat $chat;
+    protected User $from;
+    protected int $date;
+    protected ChatMember $old_chat_member;
+    protected ChatMember $new_chat_member;
+    protected ?ChatInviteLink $invite_link = null;
 
     protected array $objects_to_fill = [
       'chat' => Chat::class,

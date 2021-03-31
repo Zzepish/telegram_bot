@@ -2,33 +2,25 @@
 
 namespace App\Components\Command;
 
+use App\Components\Entity\Update;
 use App\Components\Response;
 use App\Telegram;
 
 class ShowStatsCommand extends AbstractCommand
 {
-    protected string $name        = 'Show stats';
-    protected string $description = 'Show stats of government website';
-    protected string $command     = 'showstats';
+    protected string   $name        = 'Show stats';
+    protected string   $description = 'Show stats of government website';
+    protected string   $command     = 'showstats';
     protected Telegram $telegram;
 
-    public function execute(?Response $response)
+    public function execute(?Update $update = null)
     {
-        foreach($response->getMessages() as $message) {
-            if(strpos($message->getText(), '/' . $this->command) === 0 ) {
-                $response = $this->telegram->sendMessage(
-                    [
-                        'chat_id' => $message->getChat()->getId(),
-                        'text'    => 'Test',
-                        'reply_to_message_id' => $message->getId(),
-                        'allow_sending_without_reply' => true,
-                    ]
-                );
-                $r = 1;
-            }
-        }
-
-
+        $response = $this->telegram->sendMessage([
+            'chat_id'                     => $update->getMessage()->getChat()->getId(),
+            'text'                        => 'Test',
+            'reply_to_message_id'         => $update->getMessage()->getMessageId(),
+            'allow_sending_without_reply' => true,
+        ]);
     }
 
     public function getName(): string

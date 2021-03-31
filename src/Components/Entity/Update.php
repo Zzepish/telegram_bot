@@ -2,22 +2,22 @@
 
 namespace App\Components\Entity;
 
-class Update extends AbstractEntity
+class Update extends AbstractImmutableEntity
 {
-    private int                 $update_id;
-    private ?Message            $message              = null;
-    private ?Message            $edited_message       = null;
-    private ?Message            $channel_post         = null;
-    private ?Message            $edited_channel_post  = null;
-    private ?InlineQuery        $inline_query         = null;
-    private ?ChosenInlineResult $chosen_inline_result = null;
-    private ?CallbackQuery      $callback_query       = null;
-    private ?ShippingQuery      $shipping_query       = null;
-    private ?PreCheckoutQuery   $pre_checkout_query   = null;
-    private ?Poll               $poll                 = null;
-    private ?PollAnswer         $poll_answer          = null;
-    private ?ChatMemberUpdated  $my_chat_member       = null;
-    private ?ChatMemberUpdated  $chat_member          = null;
+    protected int                 $update_id;
+    protected ?Message            $message              = null;
+    protected ?Message            $edited_message       = null;
+    protected ?Message            $channel_post         = null;
+    protected ?Message            $edited_channel_post  = null;
+    protected ?InlineQuery        $inline_query         = null;
+    protected ?ChosenInlineResult $chosen_inline_result = null;
+    protected ?CallbackQuery      $callback_query       = null;
+    protected ?ShippingQuery      $shipping_query       = null;
+    protected ?PreCheckoutQuery   $pre_checkout_query   = null;
+    protected ?Poll               $poll                 = null;
+    protected ?PollAnswer         $poll_answer          = null;
+    protected ?ChatMemberUpdated  $my_chat_member       = null;
+    protected ?ChatMemberUpdated  $chat_member          = null;
 
     protected array $objects_to_fill = [
         'message'              => Message::class,

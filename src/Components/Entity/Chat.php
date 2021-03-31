@@ -2,26 +2,26 @@
 
 namespace App\Components\Entity;
 
-class Chat extends AbstractEntity
+class Chat extends AbstractImmutableEntity
 {
-    private int        $id;
-    private string     $type;
-    private ?string    $title                    = null;
-    private ?string    $username                 = null;
-    private ?string    $first_name               = null;
-    private ?string    $last_name                = null;
-    private ?ChatPhoto $photo                    = null;
-    private ?string    $bio                      = null;
-    private ?string    $description              = null;
-    private ?string    $invite_link              = null;
-    private ?Message   $pinned_message           = null;
-    private            $permissions              = null;
-    private ?int       $slow_mode_delay          = null;
-    private ?int       $message_auto_delete_time = null;
-    private ?string    $sticker_set_name         = null;
-    private ?bool      $can_set_sticker_set      = null;
-    private ?int       $linked_chat_id           = null;
-    private            $location                 = null;
+    protected int        $id;
+    protected string     $type;
+    protected ?string    $title                    = null;
+    protected ?string    $username                 = null;
+    protected ?string    $first_name               = null;
+    protected ?string    $last_name                = null;
+    protected ?ChatPhoto $photo                    = null;
+    protected ?string    $bio                      = null;
+    protected ?string    $description              = null;
+    protected ?string    $invite_link              = null;
+    protected ?Message   $pinned_message           = null;
+    protected            $permissions              = null;
+    protected ?int       $slow_mode_delay          = null;
+    protected ?int       $message_auto_delete_time = null;
+    protected ?string    $sticker_set_name         = null;
+    protected ?bool      $can_set_sticker_set      = null;
+    protected ?int       $linked_chat_id           = null;
+    protected            $location                 = null;
 
     protected array $objects_to_fill = [
         'photo'          => ChatPhoto::class,

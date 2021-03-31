@@ -2,31 +2,22 @@
 
 namespace App\Components;
 
-use App\Components\Entity\Chat;
 use App\Components\Entity\Message;
+use App\Components\Entity\Update;
 use App\Components\Entity\User;
 
 class Response
 {
-    protected bool $ok;
+    protected bool   $ok;
     protected string $error_message = '';
-    protected array $raw_data = [];
+    protected array  $raw_data      = [];
 
     /**
      * @var Message[]
      */
-    protected array $messages = [];
+    protected array $updates = [];
 
-    public function __construct(array $data)
-    {
-        $this->raw_data = $data;
-        $this->ok = $data['ok'];
-        if($this->isOk()) {
-            $this->processResponse($data['result']);
-        } else {
-            $this->error_message = $data['description'];
-        }
-    }
+    protected ?User $user = null;
 
     public function isOk(): bool
     {
@@ -34,34 +25,45 @@ class Response
     }
 
     /**
-     * @return Message[]
+     * @return Update[]
      */
-    public function getMessages(): array
+    public function getUpdates(): array
     {
-        return $this->messages;
+        return $this->updates;
     }
 
-    private function processResponse(array $response_data): void
+    public function getUser(): ?User
     {
-        foreach($response_data as $message) {
-            $user = new User($message['message']['from']);
+        return $this->user;
+    }
 
-            $chat = new Chat($message['message']['chat']);
-
-            $message = new Message(
-                $message['update_id'],
-                $message['message']['date'],
-                $message['message']['text'],
-                $chat,
-                $user
-            );
-
-            $this->messages[] = $message;
+    public static function fromUpdates(array $data): self
+    {
+        $response           = new self;
+        $response->raw_data = $data;
+        $response->ok       = $data['ok'];
+        if ($response->isOk()) {
+            foreach ($data['result'] as $update) {
+                $response->updates[] = new Update($update);
+            }
+        } else {
+            $response->error_message = $data['description'];
         }
+
+        return $response;
     }
 
-    public function getFirstMessage(): Message
+    public static function fromGetMe(array $data)
     {
-        return $this->messages[0];
+        $response           = new self;
+        $response->raw_data = $data;
+        $response->ok       = $data['ok'];
+        if ($response->isOk()) {
+            $response->user = new User($data['result']);
+        } else {
+            $response->error_message = $data['description'];
+        }
+
+        return $response;
     }
 }

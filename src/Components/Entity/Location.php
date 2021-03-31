@@ -2,14 +2,14 @@
 
 namespace App\Components\Entity;
 
-class Location extends AbstractEntity
+class Location extends AbstractImmutableEntity
 {
-    private float  $longitude;
-    private float  $latitude;
-    private ?float $horizontal_accuracy    = null;
-    private ?int   $live_period            = null;
-    private ?int   $heading                = null;
-    private ?int   $proximity_alert_radius = null;
+    protected float  $longitude;
+    protected float  $latitude;
+    protected ?float $horizontal_accuracy    = null;
+    protected ?int   $live_period            = null;
+    protected ?int   $heading                = null;
+    protected ?int   $proximity_alert_radius = null;
 
     public function getLongitude(): float
     {

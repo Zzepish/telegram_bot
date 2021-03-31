@@ -2,12 +2,12 @@
 
 namespace App\Components\Entity;
 
-class ShippingQuery extends AbstractEntity
+class ShippingQuery extends AbstractImmutableEntity
 {
-    private string          $id;
-    private User            $from;
-    private string          $invoice_payload;
-    private ShippingAddress $shipping_address;
+    protected string          $id;
+    protected User            $from;
+    protected string          $invoice_payload;
+    protected ShippingAddress $shipping_address;
 
     protected array $objects_to_fill = [
         'from'             => User::class,
