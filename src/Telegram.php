@@ -3,8 +3,8 @@
 namespace App;
 
 use App\Components\Command\AbstractCommand;
+use App\Components\Entity\Update;
 use App\Components\Response;
-use App\Components\Tools\FilterUnansweredUpdatesInterface;
 use App\Components\Tools\UnansweredUpdatesFilterInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -18,8 +18,6 @@ class Telegram
     protected string                           $bot_token;
     protected string                           $bot_name;
     protected UnansweredUpdatesFilterInterface $unansweredUpdatesFilter;
-
-    protected $runned_updates = [];
 
     /**
      * @var AbstractCommand[] $commands
@@ -39,39 +37,56 @@ class Telegram
         $this->bot_name                = $bot_name;
     }
 
+    public function setWebhook(string $url, array $query, array $options)
+    {
+        //TODO finish implementation
+        $this->formQuery('setWebhook', [
+
+        ]);
+    }
+
+    public function deleteWebhook()
+    {
+        //TODO finish implementation
+    }
+
     public function getUpdates(
         int $limit = 100,
         int $timeout = 0,
         int $offset = 0,
         array $allowed_updates = []
     ): Response {
-        $url      = $this->formQuery('getUpdates');
-        $response = $this->sendRequest($url);
+        $response = $this->sendRequest($this->formQuery('getUpdates'), [
+            'limit'           => $limit,
+            'timeout'         => $timeout,
+            'offset'          => $offset,
+            'allowed_updates' => $allowed_updates
+        ]);
         $data     = json_decode($response->getBody(), true);
         $response = Response::fromUpdates($data);
-        $updates  = $this->unansweredUpdatesFilter->getUnansweredUpdates($response->getUpdates());
-
-        foreach ($updates as $update) {
-            if (!in_array($update->getUpdateId(), $this->runned_updates)) {
-                $this->runned_updates[] = $update->getUpdateId();
-                foreach ($this->commands as $command) {
-                    if ($command->isValid($update)) {
-                        $command->execute($update);
-                    }
-                }
-            }
-
-            $this->unansweredUpdatesFilter->addUpdate($update);
-        }
 
         return $response;
     }
 
+    /**
+     * @param Update[] $updates
+     */
+    public function handleUpdatesCommands(array $updates)
+    {
+        $updates = $this->unansweredUpdatesFilter->getUnansweredUpdates($updates);
+        foreach ($updates as $update) {
+            foreach ($this->commands as $command) {
+                if ($command->isValid($update)) {
+                    $command->execute($update);
+                }
+            }
+            $this->unansweredUpdatesFilter->addUpdate($update);
+        }
+    }
+
     public function sendMessage(array $arguments)
     {
-        $url = $this->formQuery('sendMessage', $arguments);
-
-        return $this->sendRequest($url);
+        return $this->sendRequest($this->formQuery('sendMessage', $arguments));
     }
 
     public function getMe(): Response
@@ -105,10 +120,10 @@ class Telegram
         return $url;
     }
 
-    protected function sendRequest(string $url): ResponseInterface
+    protected function sendRequest(string $url, array $options = []): ResponseInterface
     {
         try {
-            return $this->client->get($url);
+            return $this->client->post($url, $options);
         } catch (ClientException $exception) {
             return $exception->getResponse();
         }

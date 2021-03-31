@@ -46,7 +46,7 @@ class UnansweredUpdatesFilterJSONFile implements UnansweredUpdatesFilterInterfac
 
     protected function saveToFile()
     {
-        file_put_contents($this->file_path, json_encode($this->updates_ids));
+        file_put_contents($this->file_path, json_encode(array_unique($this->updates_ids)));
     }
 
 }

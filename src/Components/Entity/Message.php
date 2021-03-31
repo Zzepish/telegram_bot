@@ -60,6 +60,7 @@ class Message extends AbstractImmutableEntity
         'forward_from_chat' => Chat::class,
         'reply_to_message'  => Message::class,
         'via_bot'           => User::class,
+        'entities'          => MessageEntity::class,
         'animation'         => Animation::class,
         'audio'             => Audio::class,
         'document'          => Document::class,

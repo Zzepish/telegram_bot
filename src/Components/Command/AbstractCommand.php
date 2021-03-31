@@ -20,6 +20,9 @@ abstract class AbstractCommand implements CommandInterface
 
     public function isValid(Update $update): bool
     {
+        if(is_null($update->getMessage())) {
+            return false;
+        }
         $command = preg_split('#\s+|@#',$update->getMessage()->getText());
 
         return (trim(strtolower($command[0])) === '/' . strtolower($this->command));

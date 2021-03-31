@@ -2,8 +2,12 @@
 
 namespace App\Components\Entity;
 
+use App\Components\Entity\Traits\ToArrayTrait;
+
 abstract class AbstractImmutableEntity
 {
+    use ToArrayTrait;
+
     protected array $objects_to_fill = [];
 
     public function __construct(array $data)

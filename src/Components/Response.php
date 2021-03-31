@@ -2,7 +2,6 @@
 
 namespace App\Components;
 
-use App\Components\Entity\Message;
 use App\Components\Entity\Update;
 use App\Components\Entity\User;
 
@@ -13,7 +12,7 @@ class Response
     protected array  $raw_data      = [];
 
     /**
-     * @var Message[]
+     * @var Update[]
      */
     protected array $updates = [];
 
