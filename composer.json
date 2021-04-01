@@ -1,5 +1,18 @@
 {
+  "name": "zzepish/telegram_bot",
+  "type": "library",
+  "description": "Telegram bot (may be even small telegram bot framework)",
+  "keywords": ["telegram","bot", "framework"],
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Artem Ryskin",
+      "email": "zzepish@gmail.com",
+      "role": "Developer"
+    }
+  ],
   "require": {
+    "php": ">=7.4.0",
     "guzzlehttp/guzzle": "^7.3",
     "ext-json": "*"
   },
