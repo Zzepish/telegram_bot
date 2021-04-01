@@ -42,16 +42,21 @@ class Telegram
         $this->bot_name                = $bot_name;
     }
 
-    public function setWebhook(string $url, array $options = []): \Psr\Http\Message\ResponseInterface
+    public function setWebhook(string $url, array $query = [], array $options = []): \Psr\Http\Message\ResponseInterface
     {
-        $options['url'] = $url;
-        $url            = $this->formQuery('setWebhook');
+        $query = ['url' => $url];
+        $url            = $this->formQuery('setWebhook', $query);
         return $this->sendRequest('POST', $url, $options);
     }
 
     public function deleteWebhook(array $query = []): \Psr\Http\Message\ResponseInterface
     {
         return $this->sendRequest('GET', $this->formQuery('deleteWebhook', $query));
+    }
+
+    public function getWebhookInfo(): \Psr\Http\Message\ResponseInterface
+    {
+        return $this->sendRequest('GET', $this->formQuery('getWebhookInfo'));
     }
 
     /**
