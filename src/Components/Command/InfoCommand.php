@@ -3,6 +3,7 @@
 namespace App\Components\Command;
 
 use App\Components\Entity\Update;
+use App\Components\Method\SendMessageMethod;
 use App\Components\Response;
 use App\Telegram;
 
@@ -38,7 +39,9 @@ class InfoCommand extends AbstractCommand
 
             }
 
-            $response = $this->telegram->sendMessage([
+            $response = $this->telegram->runMethod(
+                SendMessageMethod::TELEGRAM_METHOD,
+                [
                 'chat_id'                     => $update->getMessage()->getChat()->getId(),
                 'text'                        => $response_text,
                 'reply_to_message_id'         => $update->getMessage()->getMessageId(),

@@ -4,11 +4,11 @@ namespace App;
 
 use App\Components\Command\AbstractCommand;
 use App\Components\Entity\Update;
-use App\Components\Response;
+use App\Components\Method\AbstractMethod;
+use App\Components\Response\ResponseInterface;
 use App\Components\Tools\UnansweredUpdatesFilterInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use Psr\Http\Message\ResponseInterface;
 
 class Telegram
 {
@@ -24,6 +24,11 @@ class Telegram
      */
     protected array $commands = [];
 
+    /**
+     * @var AbstractMethod[] $methods
+     */
+    protected array $methods = [];
+
 
     public function __construct(
         Client $client,
@@ -37,35 +42,16 @@ class Telegram
         $this->bot_name                = $bot_name;
     }
 
-    public function setWebhook(string $url, array $query, array $options)
+    public function setWebhook(string $url, array $options = []): \Psr\Http\Message\ResponseInterface
     {
-        //TODO finish implementation
-        $this->formQuery('setWebhook', [
-
-        ]);
+        $options['url'] = $url;
+        $url            = $this->formQuery('setWebhook');
+        return $this->sendRequest('POST', $url, $options);
     }
 
-    public function deleteWebhook()
+    public function deleteWebhook(array $query = []): \Psr\Http\Message\ResponseInterface
     {
-        //TODO finish implementation
-    }
-
-    public function getUpdates(
-        int $limit = 100,
-        int $timeout = 0,
-        int $offset = 0,
-        array $allowed_updates = []
-    ): Response {
-        $response = $this->sendRequest($this->formQuery('getUpdates'), [
-            'limit'           => $limit,
-            'timeout'         => $timeout,
-            'offset'          => $offset,
-            'allowed_updates' => $allowed_updates
-        ]);
-        $data     = json_decode($response->getBody(), true);
-        $response = Response::fromUpdates($data);
-
-        return $response;
+        return $this->sendRequest('GET', $this->formQuery('deleteWebhook', $query));
     }
 
     /**
@@ -84,22 +70,26 @@ class Telegram
         }
     }
 
-    public function sendMessage(array $arguments)
-    {
-        return $this->sendRequest($this->formQuery('sendMessage', $arguments));
-    }
-
-    public function getMe(): Response
-    {
-        $url      = $this->formQuery('getMe');
-        $response = $this->client->get($url);
-
-        return Response::fromGetMe(json_decode($response->getBody(), true));
-    }
-
-    public function addCommand($command)
+    public function addCommand(AbstractCommand $command)
     {
         $this->commands[] = $command;
+    }
+
+    public function addMethod(AbstractMethod $method)
+    {
+        $this->methods[$method::TELEGRAM_METHOD] = $method;
+    }
+
+    public function runMethod(string $method, array $query = [], array $options = []): ResponseInterface
+    {
+        if (array_key_exists($method, $this->methods)) {
+            $method   = $this->methods[$method];
+            $url      = $this->formQuery($method::TELEGRAM_METHOD, $query);
+            $response = $this->sendRequest($method->getMethod(), $url, $options);
+
+            return $method->handleResponse(json_decode($response->getBody(), true));
+        }
+        throw new \Exception('Telegram method "' . $method . '" is not in the list.');
     }
 
     /**
@@ -110,20 +100,31 @@ class Telegram
         return $this->commands;
     }
 
-    public function formQuery(string $method, array $arguments = []): string
+    /**
+     * @return AbstractMethod[]
+     */
+    public function getMethods(): array
+    {
+        return $this->methods;
+    }
+
+    public function formQuery(string $method, array $query = []): string
     {
         $url = self::TELEGRAM_API_URI . '/bot' . $this->bot_token . '/' . $method;
-        if (!empty($arguments)) {
-            $url .= '?' . http_build_query($arguments);
+        if (!empty($query)) {
+            $url .= '?' . http_build_query($query);
         }
 
         return $url;
     }
 
-    protected function sendRequest(string $url, array $options = []): ResponseInterface
-    {
+    protected function sendRequest(
+        string $method,
+        string $url,
+        array $options = []
+    ): \Psr\Http\Message\ResponseInterface {
         try {
-            return $this->client->post($url, $options);
+            return $this->client->request($method, $url, $options);
         } catch (ClientException $exception) {
             return $exception->getResponse();
         }

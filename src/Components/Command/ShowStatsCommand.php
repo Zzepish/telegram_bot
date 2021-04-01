@@ -3,7 +3,7 @@
 namespace App\Components\Command;
 
 use App\Components\Entity\Update;
-use App\Components\Response;
+use App\Components\Method\SendMessageMethod;
 use App\Telegram;
 
 class ShowStatsCommand extends AbstractCommand
@@ -26,7 +26,9 @@ class ShowStatsCommand extends AbstractCommand
         $votes_amount = self::getVotingAmount($voting_url);
         $voting_left_days = self::getVotingLeftDays($voting_url);
 
-        return $this->telegram->sendMessage([
+        return $this->telegram->runMethod(
+            SendMessageMethod::TELEGRAM_METHOD,
+            [
             'chat_id' => $update->getMessage()->getChat()->getId(),
             'text'    => "Количество голосов: $votes_amount/25000"
                 . PHP_EOL
@@ -37,22 +39,6 @@ class ShowStatsCommand extends AbstractCommand
             'allow_sending_without_reply' => true,
         ]);
     }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    public function getTelegram(): Telegram
-    {
-        return $this->telegram;
-    }
-
     public static function getVotingAmount(string $voting_url): int
     {
         $client = new \GuzzleHttp\Client();
