@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Components\Method;
+namespace Zzepish\Components\Method;
 
-use App\Components\Response\ResponseInterface;
+use Zzepish\Components\Response\ResponseInterface;
 
 abstract class AbstractMethod
 {

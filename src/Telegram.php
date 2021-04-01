@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace Zzepish;
 
-use App\Components\Command\AbstractCommand;
-use App\Components\Entity\Update;
-use App\Components\Method\AbstractMethod;
-use App\Components\Response\ResponseInterface;
-use App\Components\Tools\UnansweredUpdatesFilterInterface;
+use Zzepish\Components\Command\AbstractCommand;
+use Zzepish\Components\Entity\Update;
+use Zzepish\Components\Method\AbstractMethod;
+use Zzepish\Components\Response\ResponseInterface;
+use Zzepish\Components\Tools\UnansweredUpdatesFilterInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Components\Method;
+namespace Zzepish\Components\Method;
 
-use App\Components\Response\ResponseInterface;
-use App\Components\Response\UserResponse;
+use Zzepish\Components\Response\ResponseInterface;
+use Zzepish\Components\Response\UserResponse;
 
 class GetMeMethod extends AbstractMethod
 {

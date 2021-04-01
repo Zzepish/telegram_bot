@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Components\Entity;
+namespace Zzepish\Components\Entity;
 
-use App\Components\Entity\Traits\ToArrayTrait;
+use Zzepish\Components\Entity\Traits\ToArrayTrait;
 
 abstract class AbstractImmutableEntity
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Components\Command;
+namespace Zzepish\Components\Command;
 
-use App\Components\Entity\Update;
-use App\Components\Method\SendMessageMethod;
-use App\Components\Response;
-use App\Telegram;
+use Zzepish\Components\Entity\Update;
+use Zzepish\Components\Method\SendMessageMethod;
+use Zzepish\Components\Response;
+use Zzepish\Telegram;
 
 class InfoCommand extends AbstractCommand
 {

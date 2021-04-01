@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Components\Response;
+namespace Zzepish\Components\Response;
 
-use App\Components\Entity\Update;
+use Zzepish\Components\Entity\Update;
 
 class UpdatesResponse extends AbstractResponse
 {

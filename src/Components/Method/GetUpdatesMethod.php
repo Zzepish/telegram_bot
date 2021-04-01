@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Components\Method;
+namespace Zzepish\Components\Method;
 
-use App\Components\Response\MessageResponse;
-use App\Components\Response\ResponseInterface;
-use App\Components\Response\UpdatesResponse;
+use Zzepish\Components\Response\MessageResponse;
+use Zzepish\Components\Response\ResponseInterface;
+use Zzepish\Components\Response\UpdatesResponse;
 
 class GetUpdatesMethod extends AbstractMethod
 {

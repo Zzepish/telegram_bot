@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Components\Command;
+namespace Zzepish\Components\Command;
 
-use App\Components\Entity\Update;
-use App\Telegram;
+use Zzepish\Components\Entity\Update;
+use Zzepish\Telegram;
 
 abstract class AbstractCommand implements CommandInterface
 {

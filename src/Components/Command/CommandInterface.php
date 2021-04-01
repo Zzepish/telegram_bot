@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Components\Command;
+namespace Zzepish\Components\Command;
 
-use App\Components\Entity\Update;
+use Zzepish\Components\Entity\Update;
 
 interface CommandInterface
 {

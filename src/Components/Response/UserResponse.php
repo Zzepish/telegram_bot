@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Components\Response;
+namespace Zzepish\Components\Response;
 
-use App\Components\Entity\User;
+use Zzepish\Components\Entity\User;
 
 class UserResponse extends AbstractResponse
 {

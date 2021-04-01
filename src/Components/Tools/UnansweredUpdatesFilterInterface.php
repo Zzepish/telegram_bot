@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Components\Tools;
+namespace Zzepish\Components\Tools;
 
-use App\Components\Entity\Update;
+use Zzepish\Components\Entity\Update;
 
 interface UnansweredUpdatesFilterInterface
 {

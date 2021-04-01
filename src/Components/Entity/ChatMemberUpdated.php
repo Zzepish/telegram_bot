@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Entity;
+namespace Zzepish\Components\Entity;
 
 class ChatMemberUpdated extends AbstractImmutableEntity
 {

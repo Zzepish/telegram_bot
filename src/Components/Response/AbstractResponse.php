@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Response;
+namespace Zzepish\Components\Response;
 
 abstract class AbstractResponse implements ResponseInterface
 {

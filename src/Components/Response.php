@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Components;
+namespace Zzepish\Components;
 
-use App\Components\Entity\Update;
-use App\Components\Entity\User;
+use Zzepish\Components\Entity\Update;
+use Zzepish\Components\Entity\User;
 
 class Response
 {

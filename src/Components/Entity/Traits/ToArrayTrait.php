@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components\Entity\Traits;
+namespace Zzepish\Components\Entity\Traits;
 
 trait ToArrayTrait
 {

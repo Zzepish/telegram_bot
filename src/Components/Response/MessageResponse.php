@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Components\Response;
+namespace Zzepish\Components\Response;
 
-use App\Components\Entity\Message;
+use Zzepish\Components\Entity\Message;
 
 class MessageResponse extends AbstractResponse
 {
